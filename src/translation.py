@@ -1,16 +1,20 @@
 import readDict
-
+import POSTagger
+import nGram
 
 DEV_SET_FILE = "../data/dev.txt"
 TEST_SET_FILE = "../data/test.txt"
 DICTIONARY_PATH = "../data/"
 DICTIONARY_FILE = "dictionary.txt"
+N_GRAMS = 3
 
 
 
 class Translator:
     def __init__(self):
         self.spanDict = readDict.read(DICTIONARY_PATH, DICTIONARY_FILE)
+        # self.tagger = POSTagger.POSTagger()
+        # self.lm = nGram.nGram(N_GRAMS)
 
     def translateSentence(self, sentence):
         t = []
@@ -37,7 +41,7 @@ class Translator:
 
 def main():
   t = Translator()
-  t.translateFile("../data/corpus.txt")
+  t.translateFile(DEV_SET_FILE)
 
 if __name__ == "__main__":
     main()
