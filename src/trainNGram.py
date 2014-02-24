@@ -2,10 +2,10 @@ import cPickle as pickle
 import nltk
 from nltk.corpus import brown
 
-def trainBigram():
-	bigramModel = nltk.NgramModel(2, brown.words())
-	return bigramModel
+class nGram:
+	def __init__(self, n):
+		self.n = n
+		self.model = nltk.NgramModel(n, brown.words())
 
-def trainTrigram():
-	trigramModel = nltk.NgramModel(3, brown.words())
-	return trigramModel	
+	def logprob(self, word, context):
+		return self.model.logprob(word, context)
