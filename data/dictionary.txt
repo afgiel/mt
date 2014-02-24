@@ -77,7 +77,7 @@ convirtió:<IT> became,<IT> converted,<IT> turned
 mexicano:Mexican
 poco:little,short
 bien:good,well,nice
-fuga:leakage,leak
+fuga:leakage,leak,escape
 sobre:on,about,upon
 capital:capital
 del:of
