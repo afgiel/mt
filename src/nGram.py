@@ -15,7 +15,6 @@ class nGram:
 		permutations = set()
 		permutations.add(tuple(list()))
 		permutations = self.createAllPermutations(permutations, sentence, 0)
-		print permutations
 		best = self.chooseBestPerm(permutations)
 		return best
 
@@ -40,10 +39,11 @@ class nGram:
 		score = 0.
 		for index, word in enumerate(permutation):
 			context = permutation[max(0, index-self.n+1):index]					
-			wordScore = self.logprob(word, context)
 			print word
 			print context
+			wordScore = self.logprob(word, context)
 			print wordScore
+			print '----\n\n'
 			score += wordScore
 		return score
 

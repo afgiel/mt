@@ -58,7 +58,7 @@ class Translator:
                 transWords = assembleWords(list(toTranslate), cleanWordTuple)
             else:
                 transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
-            t.append(transWords)
+            translations.append(transWords)
         transSentence = self.lm.getBestPermutation(translations)
         return transSentence
 
