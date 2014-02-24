@@ -203,7 +203,7 @@ consejos:tips,council,advice
 año:year
 millones:million
 usuarios:users
-comisión:commision,committee
+comisión:commission,committee
 enorme:huge
 Ucrania:Ukraine
 miles:thousands

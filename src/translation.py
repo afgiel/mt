@@ -13,6 +13,7 @@ WORD = 1
 FRONT_QUOTE = 0
 END_PUNC_I = 3
 END_QUOTE = 2
+IS_CAP = 4
 
 class Translator:
     def __init__(self):
@@ -22,7 +23,8 @@ class Translator:
 
     def translateSentence(self, sentence):
 
-        def getPunctuation(word):
+        def cleanWord(word):
+            isCapitalized = False
             frontQuote = ""
             endQuote = ""
             endPunc = ""
@@ -36,27 +38,24 @@ class Translator:
                 if word[len(word)-1] == "\"":
                     endQuote = '\"'
                     word = word[:-1]
-            return frontQuote, word, endQuote, endPunc
+                if word[0].isupper():
+                    isCapitalized = True
+                    word = word[0].lower() + word[1:]
+            return frontQuote, word, endQuote, endPunc, isCapitalized
 
-        def assembleWord(word, punc, isCapitalized):
-            if isCapitalized:
+        def assembleWord(word, cleanWordTuple):
+            if cleanWordTuple[IS_CAP]:
                 word = word[0].upper() + word[1:]
-            return punc[FRONT_QUOTE] + word + punc[END_QUOTE] + punc[END_PUNC_I]
-
-
+            return cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I]
 
         t = []
         for word in sentence:
-            cleanWordTuple = getPunctuation(word)
+            cleanWordTuple = cleanWord(word)
             tWord = cleanWordTuple[WORD]
-            isCapitalized = False
-            if tWord[0].isupper():
-                isCapitalized = True
-                tWord = tWord[0].lower() + tWord[1:]
             if tWord not in self.spanDict:
-                tWord = assembleWord(tWord, cleanWordTuple, isCapitalized)
+                tWord = assembleWord(tWord, cleanWordTuple)
             else:
-                tWord = assembleWord(self.spanDict[tWord][0], cleanWordTuple, isCapitalized) 
+                tWord = assembleWord(self.spanDict[tWord][0], cleanWordTuple) 
             t.append(tWord)
         return t
 
