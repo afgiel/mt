@@ -8,6 +8,7 @@ def read(path, filename):
 			f = linePieces[0]
 			e = linePieces[1]
 			e = e.split(',')
+			e = [x.strip() for x in e]
 			if f in d: print f
 			d[f] = e
 	return d 
