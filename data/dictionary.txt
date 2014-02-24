@@ -90,8 +90,10 @@ policía:police
 sino:but,if not
 control:control
 base:base
-que:what,that
-como:like,as,how
+que:that
+qué:what
+como:like,as
+cómo:how
 décadas:decades
 juntos:together
 público:public
