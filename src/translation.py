@@ -19,7 +19,7 @@ class Translator:
     def __init__(self):
         self.spanDict = readDict.read(DICTIONARY_PATH, DICTIONARY_FILE)
         # self.tagger = POSTagger.POSTagger()
-        # self.lm = nGram.nGram(N_GRAMS)
+        self.lm = nGram.nGram(N_GRAMS)
 
     def translateSentence(self, sentence):
 
@@ -43,31 +43,34 @@ class Translator:
                     word = word[0].lower() + word[1:]
             return frontQuote, word, endQuote, endPunc, isCapitalized
 
-        def assembleWord(word, cleanWordTuple):
-            if cleanWordTuple[IS_CAP]:
-                word = word[0].upper() + word[1:]
-            return cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I]
+        def assembleWords(wordList, cleanWordTuple):
+            for word in wordList:
+                if cleanWordTuple[IS_CAP]:
+                    word = word[0].upper() + word[1:]
+                return cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I]
 
-        t = []
+        translations = []
         for word in sentence:
             cleanWordTuple = cleanWord(word)
-            tWord = cleanWordTuple[WORD]
-            if tWord not in self.spanDict:
-                tWord = assembleWord(tWord, cleanWordTuple)
+            toTranslate = cleanWordTuple[WORD]
+            transWords = []
+            if toTranslate not in self.spanDict:
+                transWords = assembleWords(list(toTranslate), cleanWordTuple)
             else:
-                tWord = assembleWord(self.spanDict[tWord][0], cleanWordTuple) 
-            t.append(tWord)
-        return t
+                transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
+            t.append(transWords)
+        transSentence = self.lm.getBestPermutation(translations)
+        return transSentence
 
     def translateFile(self, fileName = DEV_SET_FILE):
         f = open(fileName)
         for line in f:
-            s = line.split()
-            t = self.translateSentence(s)
+            source = line.split()
+            target = self.translateSentence(source)
             print "Spanish sentence:"
-            print " ".join(s)
+            print " ".join(source)
             print "English translation:"
-            print " ".join(t)
+            print " ".join(target)
             print
             print
         f.close()

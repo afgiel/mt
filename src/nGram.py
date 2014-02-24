@@ -4,8 +4,9 @@ from nltk.corpus import brown
 class nGram:
 	def __init__(self, n):
 		self.n = n
-		print "training ngram"
+		print "Training ngram language model..."
 		self.model = nltk.NgramModel(n, brown.words())
+		print "--Training complete--"
 
 	def logprob(self, word, context):
 		return self.model.logprob(word, context)
