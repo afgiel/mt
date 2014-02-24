@@ -1,1 +1,219 @@
 #F:E1,E2,E3
+tomará:<IT> will take,<IT> will drink
+viajó:<IT> travelled
+reunían:<THEY> met
+dijo:<IT> said
+concentración:concentration
+reestablecerse:to recover
+maduro:Mature
+arresto:arrest
+uno:one
+país:country
+agencia:agency
+momento:time,moment
+incita:<IT> incites
+esperado:expected
+primer:first
+crece:<IT> grows
+hielo:ice
+narcotraficantes:drug traffickers
+dice:<IT> says
+la:the,a,it,her
+lo:the,a,it,him
+fue:<IT> was,<IT> went
+estuvieron:<THEY> were
+número:number
+personas:people,persons
+patinaje:skating
+servicio:service
+logró:<IT> achieved
+ponga:<IT> puts
+fundó:<IT> founded
+poderosas:powerful
+estaba:<IT> was,<I> was
+recordar:to remember
+seguridad:security,safety
+cuando:when,as
+entregarse:to surrender
+de:of,from,by,with
+compañía:company
+capo:head,chief
+fuerte:strong
+Aparentemente:apparently
+completaron:<THEY> completed
+estados:states
+víctimas:victims
+brinda:<IT> provides
+dio:<IT> gives
+aún:yet,even
+mientras:while,as
+noventa:ninety
+más:more,most,plus
+representa:<IT> represents
+desde:from,since
+sido:<IT> was,<IT> been
+segundos:seconds
+importantes:important
+sentido:sense,meaning
+federales:federal
+en:in,on,at,to
+millón:million
+acumulado:<IT> accumulated
+olímpicos:Olympic
+día:day
+atrás:back,behind
+está:<IT> is
+dirigida:directed
+domingo:Sunday
+conferencia:conference
+cargos:charges
+piensa:<IT> thinks
+apoyo:support
+revista:magazine,journal
+es:<IT> is
+mexicana:Mexican
+dirigió:<IT> directed
+convirtió:<IT> became,<IT> converted,<IT> turned
+mexicano:Mexican
+poco:little,short
+bien:good,well,nice
+fuga:leakage,leak
+sobre:on,about,upon
+capital:capital
+del:of
+viernes:Friday
+quedarse:to stay,to remain
+señalamientos:signs
+Unidos:United
+dicen:<THEY> say
+policía:police
+sino:but,if not
+control:control
+base:base
+que:what,that
+como:like,as,how
+décadas:decades
+juntos:together
+público:public
+ambiente:environment,atmosphere
+alto:high,tall
+el:the
+años:years
+En:in,on,at
+violencia:violence
+esperamos:<WE> hope
+intelligence:Intelligence
+paso:step
+autoridades:authorities
+una:one,a,an
+televisión:television
+quién:who,whom
+crimen:crime,offense
+quien:whoever,whomever
+con:with,buy
+políticas:policies,politicians,political
+fuerzas:forces
+creció:<IT> grew,<IT> rose
+por:by,for,to,as
+durante:during
+mucho:much,a lot of
+enfocándose:focusing
+riendas:reins
+diciendo:saying
+contrato:contract,agreement
+corto:short
+libre:free
+enemigo:enemy
+principios:beginnings
+presidente:president
+incluyó:<IT> included
+artísticas:artistic
+pasado:past,last
+abiertamente:openly
+pero:but,only
+cinco:five
+migrando:migrating
+los:the,them
+describió:<IT> described
+prensa:press
+narcotráfico:drug trafficking,drug trafficker
+a:to,at
+homosexual:homosexual
+para:for,in order to
+este:this
+parte:part
+oposición:opposition
+realizó:<IT> performed,<IT> realized,<IT> did
+gobierno:government
+intentan:<THEY> try,<THEY> attempt
+según:according to,by,depending on
+múltiples:multiple
+ha:<IT> has
+lista:ready,list,roster
+entre:between,amongst,among
+marcha:march,track,running
+pese:despite
+asegura:<IT> ensures,<IT> assures
+tener:to have
+un:one
+era:<IT> was,<I> was
+plaza:plaza,square
+tres:three
+presentaciones:presentations,filings
+duro:hard,rough,tough
+mexicanas:mexicans
+esto:this
+confirmó:<IT> confirmed
+hombre:man,husband
+detenido:arrested,detained
+firmar:to sign
+al:to the
+mundo:world
+cuatro:four
+nombrado:appointed,designated
+mujer:woman
+buscado:searched,seeked,searched for,looked for
+pasó:<IT> passed,<IT> happened
+operación:operation,transaction
+golpe:blow,shock,coup
+captura:capture,catch
+no:no,not
+respaldo:back
+trabajando:working
+transmitida:transmitted
+dudas:doubts
+jugará:<IT> will play
+independencia:independence
+patinadoras:skaters
+sin:without,out of,minus
+las:the
+adolescente:teen,teenager
+tiempo:time,weather,period
+hotel:hotel
+noche:night
+cargo:charge,care,position
+sábado:Saturday
+autodefensa":self-defense
+podía:<IT> could,<IT> was able to,<I> could,<I> was able to
+funcionario:official
+poderoso:powerful,potent
+consejos:tips,council,advice
+año:year
+millones:million
+usuarios:users
+comisión:commision,committee
+enorme:huge
+Ucrania:Ukraine
+miles:thousands
+eludido:avoided,circumvented,evaded
+estatal:state,governmental
+solemne:solemn,dignified
+tasa:rate
+su:your,its,his,their,her
+manifestaciones:manifestations,demonstrations
+están:<THEY> are
+minutos:minutes
+programa:program,platform
+y:and
+dos:two
+se:oneself,self
