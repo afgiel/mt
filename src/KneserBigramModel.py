@@ -5,7 +5,7 @@ BACKOFF_COEFFICIENT = .9
 DISCOUNT = .35
 STRIP_CHARS = "<>.\",?! "
 
-class KneserNeyModel:
+class KneserBigramModel:
     """Kneser-Ney Backoff language model - Implements the Kneser-Ney model
     with bigrams and backoffs to laplace unigram if the given bigram does
     not exist in the training corpus."""
@@ -16,7 +16,9 @@ class KneserNeyModel:
         self.continuationCounts = collections.defaultdict(lambda: 0)
         self.followingCounts = collections.defaultdict(lambda: 0)
         self.total = 1
+        print "Training Language Model..."
         self.train(brown.sents())
+        print "--Training Complete--"
 
     def train(self, corpus):
         """ Takes a corpus and trains your language model. 

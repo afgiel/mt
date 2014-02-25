@@ -1,5 +1,5 @@
 #F:E1,E2,E3
-tomará:<IT> will take,<IT> will drink
+tomará:<IT> will take,<IT> will have
 viajó:<IT> travelled
 reunían:<THEY> met
 dijo:<IT> said
@@ -34,10 +34,10 @@ estaba:<IT> was,<I> was
 recordar:to remember
 seguridad:security,safety
 cuando:when,as
-entregarse:to surrender
+entregarse:to surrender, to turn oneself in
 de:of,from,by,with
 compañía:company
-capo:head,chief
+capo:head,chief,boss
 fuerte:strong
 aparentemente:apparently
 completaron:<THEY> completed
@@ -45,7 +45,7 @@ estados:states
 víctimas:victims
 brinda:<IT> provides
 dio:<IT> gives
-aún:yet,even
+aún:yet,even,still
 mientras:while,as
 noventa:ninety
 más:more,most,plus
@@ -110,7 +110,7 @@ una:one,a,an
 televisión:television
 quién:who,whom
 crimen:crime,offense
-quien:whoever,whomever
+quien:whoever,whomever,who
 con:with,buy
 políticas:policies,politicians,political
 fuerzas:forces
@@ -174,7 +174,7 @@ cuatro:four
 nombrado:appointed,designated
 mujer:woman
 buscado:searched,seeked,searched for,looked for
-pasó:<IT> passed,<IT> happened
+pasó:<IT> passed,<IT> happened,<IT> spent
 operación:operation,transaction
 golpe:blow,shock,coup
 captura:capture,catch
@@ -218,5 +218,5 @@ programa:program,platform
 y:and
 dos:two
 se:oneself,self
-EEUU: United States
-EE.UU: United States
+eEUU: United States
+eE.UU: United States

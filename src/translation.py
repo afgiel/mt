@@ -24,7 +24,8 @@ class Translator:
     def __init__(self):
         self.spanDict = readDict.read(DICTIONARY_PATH, DICTIONARY_FILE)
         self.tagger = POSTagger.POSTagger()
-        self.lm = KneserNeyModel.KneserNeyModel()
+        self.lm = KneserBigramModel.KneserBigramModel()
+        # self.lm = KneserTrigramModel.KneserTrigramModel()
 
     def translateSentence(self, sentence):
 
