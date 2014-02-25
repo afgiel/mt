@@ -20,6 +20,7 @@ IS_CAP = 4
 NOUN = "nc"
 ADJ = "aq0"
 VERB = "vmip3s0"
+DROP_WORDS = ['un', 'se', 'a']
 
 class Translator:
     def __init__(self):
@@ -144,7 +145,10 @@ class Translator:
             if toTranslate not in self.spanDict:
                 transWords = assembleWords([toTranslate], cleanWordTuple)
             else:
-                transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
+                if toTranslate in DROP_WORDS:
+                    transWords = assembleWords(self.spanDict[toTranslate] + [''], cleanWordTuple) 
+                else:    
+                    transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
             translations.append(transWords)
         transSentence = UCS.UCS(translations, self.lm)
 
