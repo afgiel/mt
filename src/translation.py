@@ -17,11 +17,13 @@ FRONT_QUOTE = 0
 END_PUNC_I = 3
 END_QUOTE = 2
 IS_CAP = 4
+NOUN = "nc"
+ADJ = "aq0ms0"
 
 class Translator:
     def __init__(self):
         self.spanDict = readDict.read(DICTIONARY_PATH, DICTIONARY_FILE)
-        # self.tagger = POSTagger.POSTagger()
+        self.tagger = POSTagger.POSTagger()
         self.lm = KneserNeyModel.KneserNeyModel()
 
     def translateSentence(self, sentence):
@@ -54,8 +56,62 @@ class Translator:
                 translations.append(cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I])
             return translations
 
+        def preProcess(tags, words):
+            for i in range(len(tags)):
+                if tags[i][0:2] == NOUN and not i > len(tags)-3:
+                    if tags[i+2][0:2] == NOUN:
+                        if words[i+1] == 'de' or words[i+1] == 'del':
+                            newWords = words[:i]
+                            newTags = words[:i]
+                            newWords.append(words[i+2])
+                            newTags.append(tags[i+2])
+                            newWords.append(words[i])
+                            newTags.append(tags[i])
+                            newWords += words[i+3:]
+                            newTags += tags[i+3:]
+                            return preProcess(newTags, newWords)
+                elif tags[i][0:2] == NOUN and not i > len(tags)-2:
+                    if tags[i+1] == ADJ:
+                        newWords = words[:i]
+                        newTags = words[:i]
+                        newWords.append(words[i+1])
+                        newTags.append(tags[i+1])
+                        newWords.append(words[i])
+                        newTags.append(tags[i])
+                        newWords += words[i+2:]
+                        newTags += tags[i+2:]
+                        return preProcess(newTags, newWords)
+                elif tags[i][0:2] == NOUN and not i > len(tags)-3:
+                    if tags[i+2] == ADJ and words[i+1] == 'm\xc3s':
+                        newWords = words[:i]
+                        newTags = words[:i]
+                        newWords.append('m\xc3s')
+                        newTags.append(tags[i+1])
+                        newWords.append(words[i+2])
+                        newTags.append(tags[i+2])
+                        newWords.append(words[i])
+                        newTags.append(tags[i])
+                        newWords += words[i+3:]
+                        newTags += tags[i+3:]
+                        return preProcess(newTags, newWords)
+            return tags, words
+
         translations = []
+        prepreProcessedSentence = []
+        prepreProcessedTags = []
+
         for word in sentence:
+            cleanWordTuple = cleanWord(word)
+            toTranslate = cleanWordTuple[WORD]
+            prepreProcessedSentence.append(toTranslate)
+
+        prepreProcessedTagTuples = self.tagger.tag(prepreProcessedSentence)
+        prepreProcessedTags = []
+        for tagTuple in prepreProcessedTagTuples:
+            prepreProcessedTags.append(tagTuple[1])
+        preProcessedTags, preProcessedSentence = preProcess(prepreProcessedTags, prepreProcessedSentence)
+
+        for word in preProcessedSentence:
             cleanWordTuple = cleanWord(word)
             toTranslate = cleanWordTuple[WORD]
             transWords = []
@@ -66,9 +122,7 @@ class Translator:
             translations.append(transWords)
         transSentence = UCS.UCS(translations, self.lm)
         return transSentence
-
-    
-
+ 
 
     def translateFile(self, fileName = DEV_SET_FILE):
         def splitLines(line):
