@@ -3,7 +3,7 @@ from nltk.corpus import brown
 
 BACKOFF_COEFFICIENT = .9
 DISCOUNT = .35
-
+STRIP_CHARS = "<>.\",?!"
 
 class KneserNeyModel:
     """Kneser-Ney Backoff language model - Implements the Kneser-Ney model
@@ -30,6 +30,8 @@ class KneserNeyModel:
         for sentence in corpus:
             previousWord = ""
             for word in sentence:
+                word = word.strip(STRIP_CHARS)
+                word = word.lower()
                 currentWord = word
                 self.unigramCounts[currentWord] += 1
                 self.total += 1
@@ -52,7 +54,12 @@ class KneserNeyModel:
         # TODO your code here
         score = 0.0 
         previousWord = ""
+        newSentence = []
+        for word in sentence:
+            newSentence += word.split()
         for currentWord in sentence:
+            currentWord = currentWord.strip(STRIP_CHARS)
+            currentWord = currentWord.lower()
             if previousWord != "":
                 bigram = (previousWord, currentWord)
                 bigramCount = self.bigramCounts[bigram]

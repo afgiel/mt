@@ -101,7 +101,6 @@ ambiente:environment,atmosphere
 alto:high,tall
 el:the
 años:years
-en:in,on,at
 violencia:violence
 esperamos:<WE> hope
 intelligence:Intelligence
