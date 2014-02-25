@@ -26,10 +26,10 @@ class KneserNeyModel:
         #    for sentence in corpus.corpus:
         #       for datum in sentence.data:  
         #         word = datum.word
-        for sentence in corpus.corpus:
+        for sentence in corpus:
             previousWord = ""
-            for datum in sentence.data:
-                currentWord = datum.word
+            for word in sentence:
+                currentWord = word
                 self.unigramCounts[currentWord] += 1
                 self.total += 1
                 if previousWord != "":
@@ -65,7 +65,7 @@ class KneserNeyModel:
                     score += math.log(count * BACKOFF_COEFFICIENT)
                     score -= math.log(self.total)
             previousWord = currentWord
-        return score
+        return -score
 
 
 
