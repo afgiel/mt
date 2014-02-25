@@ -80,7 +80,7 @@ bien:good,well,nice
 fuga:leakage,leak,escape
 sobre:on,about,upon
 capital:capital
-del:of
+del:of the
 viernes:Friday
 quedarse:to stay,to remain
 señalamientos:signs
@@ -195,7 +195,7 @@ hotel:hotel
 noche:night
 cargo:charge,care,position
 sábado:Saturday
-autodefensa":self-defense
+autodefensa:self-defense
 podía:<IT> could,<IT> was able to,<I> could,<I> was able to
 funcionario:official
 poderoso:powerful,potent
@@ -219,3 +219,5 @@ programa:program,platform
 y:and
 dos:two
 se:oneself,self
+EEUU: United States
+EE.UU: United States
