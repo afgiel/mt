@@ -1,4 +1,5 @@
 import math, collections, copy
+from nltk.corpus import brown
 
 BACKOFF_COEFFICIENT = .9
 DISCOUNT = .35
@@ -8,14 +9,14 @@ class KneserNeyModel:
     """Kneser-Ney Backoff language model - Implements the Kneser-Ney model
     with bigrams and backoffs to laplace unigram if the given bigram does
     not exist in the training corpus."""
-    def __init__(self, corpus):
+    def __init__(self):
         """Initialize your data structures in the constructor."""
         self.bigramCounts = collections.defaultdict(lambda : 0)
         self.unigramCounts = collections.defaultdict(lambda : 1)
         self.continuationCounts = collections.defaultdict(lambda: 0)
         self.followingCounts = collections.defaultdict(lambda: 0)
         self.total = 1
-        self.train(corpus)
+        self.train(brown.sents())
 
     def train(self, corpus):
         """ Takes a corpus and trains your language model. 

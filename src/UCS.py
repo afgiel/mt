@@ -3,9 +3,9 @@ from Queue import PriorityQueue as pqueue
 def UCS(sentence, model):
 	frontier = pqueue()
 	for root in sentence[0]:
-		node = list(root)
-		cost = model.score(root)
-		frontier.put((cost, root))
+		node = [root]
+		cost = model.score(node)
+		frontier.put((cost, node))
 	while(True):
 		if frontier.empty():
 			return None

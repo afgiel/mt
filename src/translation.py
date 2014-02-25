@@ -2,6 +2,8 @@ import readDict
 import POSTagger
 import nGram
 import re
+import UCS
+import KneserNeyModel
 
 DEV_SET_FILE = "../data/dev.txt"
 TEST_SET_FILE = "../data/test.txt"
@@ -19,7 +21,7 @@ class Translator:
     def __init__(self):
         self.spanDict = readDict.read(DICTIONARY_PATH, DICTIONARY_FILE)
         # self.tagger = POSTagger.POSTagger()
-        self.lm = nGram.nGram(N_GRAMS)
+        self.lm = KneserNeyModel.KneserNeyModel()
 
     def translateSentence(self, sentence):
 
@@ -61,7 +63,7 @@ class Translator:
             else:
                 transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
             translations.append(transWords)
-        transSentence = self.lm.getBestPermutation(translations)
+        transSentence = UCS.UCS(translations, self.lm)
         return transSentence
 
     def translateFile(self, fileName = DEV_SET_FILE):
