@@ -73,7 +73,7 @@ class Translator:
         def splitLines(line):
             splitLines = []
             firstSplit = line.split(",")
-            for i in xrange(len(firstSplit)):
+            for i in xrange(len(firstSplit)-1):
                 firstSplit[i] += ","
             for lineSplit in firstSplit:
                 splitLines += lineSplit.split("y")
