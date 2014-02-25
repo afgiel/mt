@@ -1,4 +1,3 @@
-import os.path
 import nltk
 from nltk.tag import hmm
 from nltk.corpus import cess_esp

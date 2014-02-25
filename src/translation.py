@@ -2,13 +2,15 @@ import readDict
 import POSTagger
 import nGram
 import re
+import UCS
+import KneserNeyModel
 
 DEV_SET_FILE = "../data/dev.txt"
 TEST_SET_FILE = "../data/test.txt"
 DICTIONARY_PATH = "../data/"
 DICTIONARY_FILE = "dictionary.txt"
 N_GRAMS = 3
-END_PUNCTUATION = [".", "?", "!", ","]
+END_PUNCTUATION = [".", "?", "!", ",", ":"]
 WORD = 1
 FRONT_QUOTE = 0
 END_PUNC_I = 3
@@ -19,7 +21,7 @@ class Translator:
     def __init__(self):
         self.spanDict = readDict.read(DICTIONARY_PATH, DICTIONARY_FILE)
         # self.tagger = POSTagger.POSTagger()
-        self.lm = nGram.nGram(N_GRAMS)
+        self.lm = KneserNeyModel.KneserNeyModel()
 
     def translateSentence(self, sentence):
 
@@ -61,16 +63,31 @@ class Translator:
             else:
                 transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
             translations.append(transWords)
-        transSentence = self.lm.getBestPermutation(translations)
+        transSentence = UCS.UCS(translations, self.lm)
         return transSentence
 
+    
+
+
     def translateFile(self, fileName = DEV_SET_FILE):
+        def splitLines(line):
+            splitLines = []
+            firstSplit = line.split(",")
+            for i in xrange(len(firstSplit)-1):
+                firstSplit[i] += ","
+            for lineSplit in firstSplit:
+                splitLines += lineSplit.split("y")
+            return splitLines
+
+
         f = open(fileName)
         for line in f:
-            source = line.split()
-            target = self.translateSentence(source)
+            sourceSplits = splitLines(line)
+            target = []
+            for source in sourceSplits:
+                target += self.translateSentence(source.split())
             print "Spanish sentence:"
-            print " ".join(source)
+            print line
             print "English translation:"
             print " ".join(target)
             print

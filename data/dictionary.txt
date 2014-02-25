@@ -39,7 +39,7 @@ de:of,from,by,with
 compañía:company
 capo:head,chief
 fuerte:strong
-Aparentemente:apparently
+aparentemente:apparently
 completaron:<THEY> completed
 estados:states
 víctimas:victims
@@ -84,7 +84,7 @@ del:of the
 viernes:Friday
 quedarse:to stay,to remain
 señalamientos:signs
-Unidos:United
+unidos:United
 dicen:<THEY> say
 policía:police
 sino:but,if not
@@ -101,7 +101,6 @@ ambiente:environment,atmosphere
 alto:high,tall
 el:the
 años:years
-En:in,on,at
 violencia:violence
 esperamos:<WE> hope
 intelligence:Intelligence
@@ -158,7 +157,7 @@ pese:despite
 asegura:<IT> ensures,<IT> assures
 tener:to have
 un:one
-era:<IT> was,<I> was
+era:<IT> was,<IT> was
 plaza:plaza,square
 tres:three
 presentaciones:presentations,filings
@@ -205,7 +204,7 @@ millones:million
 usuarios:users
 comisión:commission,committee
 enorme:huge
-Ucrania:Ukraine
+ucrania:Ukraine
 miles:thousands
 eludido:avoided,circumvented,evaded
 estatal:state,governmental
