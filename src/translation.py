@@ -44,10 +44,12 @@ class Translator:
             return frontQuote, word, endQuote, endPunc, isCapitalized
 
         def assembleWords(wordList, cleanWordTuple):
+            translations = []
             for word in wordList:
                 if cleanWordTuple[IS_CAP]:
                     word = word[0].upper() + word[1:]
-                return cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I]
+                translations.append(cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I])
+            return translations
 
         translations = []
         for word in sentence:
@@ -55,7 +57,7 @@ class Translator:
             toTranslate = cleanWordTuple[WORD]
             transWords = []
             if toTranslate not in self.spanDict:
-                transWords = assembleWords(list(toTranslate), cleanWordTuple)
+                transWords = assembleWords([toTranslate], cleanWordTuple)
             else:
                 transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
             translations.append(transWords)
