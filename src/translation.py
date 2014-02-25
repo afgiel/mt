@@ -18,7 +18,8 @@ END_PUNC_I = 3
 END_QUOTE = 2
 IS_CAP = 4
 NOUN = "nc"
-ADJ = "aq0ms0"
+ADJ = "aq0"
+VERB = "vmip3s0"
 
 class Translator:
     def __init__(self):
@@ -71,7 +72,7 @@ class Translator:
                             newTags += tags[i+3:]
                             return preProcess(newTags, newWords)
                 elif tags[i][0:2] == NOUN and not i > len(tags)-2:
-                    if tags[i+1] == ADJ:
+                    if tags[i+1][0:3] == ADJ:
                         newWords = words[:i]
                         newTags = words[:i]
                         newWords.append(words[i+1])
@@ -82,7 +83,7 @@ class Translator:
                         newTags += tags[i+2:]
                         return preProcess(newTags, newWords)
                 elif tags[i][0:2] == NOUN and not i > len(tags)-3:
-                    if tags[i+2] == ADJ and words[i+1] == 'm\xc3s':
+                    if tags[i+2][0:3] == ADJ and words[i+1] == 'm\xc3s':
                         newWords = words[:i]
                         newTags = words[:i]
                         newWords.append('m\xc3s')
@@ -94,6 +95,31 @@ class Translator:
                         newWords += words[i+3:]
                         newTags += tags[i+3:]
                         return preProcess(newTags, newWords)
+            return tags, words
+
+        def postProcess(tags, words):
+            for i in range(len(tags)):
+                if words[i] == 'no' and not i > len(tags)-2:
+                    if tags[i+1] == VERB:           
+                        newWords = words[:i]
+                        newTags = words[:i]
+                        newWords.append('does not')
+                        newTags.append(tags[i])
+                        if words[i+1][len(words[i+1])-1] == 's':
+                            newWords.append(words[i+1][:len(words[i+1])-1])
+                        newTags.append(tags[i+1])
+                        newWords += words[i+2:]
+                        newTags += tags[i+2:]
+                        return postProcess(newTags, newWords)
+                elif words[i] == 'a' and not i > len(tags)-2:
+                    if words[i+1][0] in 'aeiou':                
+                        newWords = words[:i]
+                        newTags = words[:i]
+                        newWords.append('an')
+                        newTags.append(tags[i])
+                        newWords += words[i+1:]
+                        newTags += tags[i+1:]
+                        return postProcess(newTags, newWords)
             return tags, words
 
         translations = []
@@ -121,7 +147,10 @@ class Translator:
                 transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
             translations.append(transWords)
         transSentence = UCS.UCS(translations, self.lm)
-        return transSentence
+
+        postProcessedTags, postProcessedSentence = postProcess(preProcessedTags, transSentence)
+
+        return postProcessedSentence
  
 
     def translateFile(self, fileName = DEV_SET_FILE):
