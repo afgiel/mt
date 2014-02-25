@@ -3,7 +3,8 @@ import POSTagger
 import nGram
 import re
 import UCS
-import KneserNeyModel
+import KneserBigramModel
+import KneserTrigramModel
 import string
 import applyRules
 
