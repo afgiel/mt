@@ -41,7 +41,9 @@ class nGram:
 			context = permutation[max(0, index-self.n+1):index]					
 			print word
 			print context
-			wordScore = self.logprob(word, context)
+			wordScore = 0.
+			if self.model.prob(word,context) > 0:
+				wordScore = self.logprob(word, context)
 			print wordScore
 			print '----\n\n'
 			score += wordScore
