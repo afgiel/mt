@@ -1,6 +1,6 @@
-NOUN = 'NOUN'
-ADJ = 'ADJ'
-VERB = 'VERB'
+NOUN = "nc"
+ADJ = "aq0"
+VERB = "vmip3s0"
 
 def preProcess(tags, words):
 	for i in range(len(tags)):
