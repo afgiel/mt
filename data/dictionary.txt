@@ -56,7 +56,7 @@ segundos:seconds
 importantes:important
 sentido:sense,meaning
 federales:federal
-en:in,on,at,to
+en:in,on,at
 millón:million
 acumulado:<IT> accumulated
 olímpicos:Olympic
@@ -214,6 +214,7 @@ su:your,its,his,their,her
 manifestaciones:manifestations,demonstrations
 están:<THEY> are
 minutos:minutes
+minuto:minute
 programa:program,platform
 y:and
 dos:two
