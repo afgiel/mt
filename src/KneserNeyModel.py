@@ -3,7 +3,7 @@ from nltk.corpus import brown
 
 BACKOFF_COEFFICIENT = .9
 DISCOUNT = .35
-STRIP_CHARS = "<>.\",?!"
+STRIP_CHARS = "<>.\",?! "
 
 class KneserNeyModel:
     """Kneser-Ney Backoff language model - Implements the Kneser-Ney model

@@ -39,7 +39,7 @@ de:of,from,by,with
 compañía:company
 capo:head,chief
 fuerte:strong
-Aparentemente:apparently
+aparentemente:apparently
 completaron:<THEY> completed
 estados:states
 víctimas:victims
@@ -157,7 +157,7 @@ pese:despite
 asegura:<IT> ensures,<IT> assures
 tener:to have
 un:one
-era:<IT> was,<I> was
+era:<IT> was,<IT> was
 plaza:plaza,square
 tres:three
 presentaciones:presentations,filings
