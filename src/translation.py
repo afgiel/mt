@@ -4,6 +4,7 @@ import nGram
 import re
 import UCS
 import KneserNeyModel
+import string
 
 DEV_SET_FILE = "../data/dev.txt"
 TEST_SET_FILE = "../data/test.txt"
@@ -72,12 +73,9 @@ class Translator:
     def translateFile(self, fileName = DEV_SET_FILE):
         def splitLines(line):
             splitLines = []
-            firstSplit = line.split(",")
-            for i in xrange(len(firstSplit)-1):
-                firstSplit[i] += ","
-            for lineSplit in firstSplit:
-                splitLines += lineSplit.split("y")
-            return splitLines
+            firstSplit = string.replace(line, ",", ",***")
+            secondSplit = string.replace(firstSplit, " y ", " y*** ")
+            return secondSplit.split("***")
 
 
         f = open(fileName)
