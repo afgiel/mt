@@ -12,7 +12,7 @@ def UCS(sentence, model):
 		else:
 			node = list(frontier.get()[1])
 			if len(node) == len(sentence):
-				return node
+				return node, cost
 			else:			
 				index = len(node) 
 				for nextWord in sentence[index]:
