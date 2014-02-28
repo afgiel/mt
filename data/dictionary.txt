@@ -155,7 +155,7 @@ marcha:march,track,running
 pese:despite
 asegura:<IT> ensures,<IT> assures
 tener:to have
-un:one
+un:one,a,an
 era:<IT> was,<IT> was
 plaza:plaza,square
 tres:three
