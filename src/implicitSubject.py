@@ -3,6 +3,8 @@ import GenderClassifier
 
 NOUN = "nc"
 
+NON_NAMES = ["in", "an", "sunday", "ukraine"]
+
 def removeTags(sentence, tags):
 	gc = GenderClassifier.GenderClassifier()
 	for index, wordOptions in enumerate(sentence):
@@ -35,28 +37,30 @@ def fixTag(index, sentence, tags, gc):
 		if male:
 			for index, word in enumerate(wordOptions):
 				word = re.sub('<IT>', 'he', word)
+				word = re.sub('<THEY>', 'they', word)
 				wordOptions[index] = word
 			return
 		elif female:
 			for index, word in enumerate(wordOptions):
 				word = re.sub('<IT>', 'she', word)
+				word = re.sub('<THEY>', 'they', word)
 				wordOptions[index] = word
 			return
 		else:
 			for index, word in enumerate(wordOptions):
-				word = re.sub('<IT>', 'it', word)
+				word = re.sub('<IT> ', '', word)
 				word = re.sub('<THEY>', 'they', word)
 				wordOptions[index] = word
 			return
 
 def hasMale(sentence, gc):
 	for wordOptions in sentence:
-		for word in wordOptions:
-			if gc.guessGender(word) == 'm':
+		for word in wordOptions: 
+			if word.lower() not in NON_NAMES and gc.guessGender(word) == 'm':
 				return True
 
 def hasFemale(sentence, gc):
 	for wordOptions in sentence:
 		for word in wordOptions:
-			if gc.guessGender(word) == 'f':
+			if word.lower() not in NON_NAMES and gc.guessGender(word) == 'f':
 				return True				

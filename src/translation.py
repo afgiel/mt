@@ -8,6 +8,7 @@ import KneserTrigramModel
 import string
 import applyRules
 import sys
+import implicitSubject
 
 DEV_SET_FILE = "../data/dev.txt"
 TEST_SET_FILE = "../data/test.txt"
@@ -29,7 +30,7 @@ class Translator:
         self.lm = KneserBigramModel.KneserBigramModel()
         # self.lm = KneserTrigramModel.KneserTrigramModel()
 
-    def translateSentence(self, sentence):
+    def translateFragment(self, fragment):
 
         def cleanWord(word):
             isCapitalized = False
@@ -46,9 +47,8 @@ class Translator:
                 if word[len(word)-1] == "\"":
                     endQuote = '\"'
                     word = word[:-1]
-                if word[0].isupper():
-                    isCapitalized = True
-                    word = word[0].lower() + word[1:]
+            if word[0].isupper():
+                isCapitalized = True
             return frontQuote, word, endQuote, endPunc, isCapitalized
 
         def assembleWords(wordList, cleanWordTuple):
@@ -59,20 +59,26 @@ class Translator:
                 translations.append(cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I])
             return translations
 
-        def getTranslatedSentence(sentenceToTranslate):
+        def getTranslatedSentence(sentenceToTranslate, posTags):
             translations = []
             for word in sentenceToTranslate:
                 cleanWordTuple = cleanWord(word)
                 toTranslate = cleanWordTuple[WORD]
                 transWords = []
-                if toTranslate not in self.spanDict:
-                    transWords = assembleWords([toTranslate], cleanWordTuple)
+                if toTranslate.lower() not in self.spanDict:
+                    transWords = assembleWords([toTranslate.lower()], cleanWordTuple)
                 else:
                     if toTranslate in DROP_WORDS:
-                        transWords = assembleWords(self.spanDict[toTranslate] + [''], cleanWordTuple) 
+                        transWords = assembleWords(self.spanDict[toTranslate.lower()] + [''], cleanWordTuple) 
                     else:
-                        transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
+                        transWords = assembleWords(self.spanDict[toTranslate.lower()], cleanWordTuple) 
                 translations.append(transWords)
+
+            pTags = []
+            getSentenceOptions(posTags, pTags)
+            if type(pTags[0]) == type(list()):
+                pTags = pTags[0]
+            implicitSubject.removeTags(translations, pTags)
             transSentence, transCost = UCS.UCS(translations, self.lm)
             return transSentence, transCost
 
@@ -87,10 +93,8 @@ class Translator:
         prepreProcessedSentence = []
         prepreProcessedTags = []
 
-        for word in sentence:
-            cleanWordTuple = cleanWord(word)
-            toTranslate = cleanWordTuple[WORD]
-            prepreProcessedSentence.append(toTranslate)
+        for word in fragment:
+            prepreProcessedSentence.append(word)
 
         prepreProcessedTagTuples = self.tagger.tag(prepreProcessedSentence)
         prepreProcessedTags = []
@@ -104,11 +108,11 @@ class Translator:
             sentenceOptions = []
             getSentenceOptions(preProcessedSentence, sentenceOptions)
             for sentenceOption in sentenceOptions:
-                transSentenceOption, transCost = getTranslatedSentence(sentenceOption)
+                transSentenceOption, transCost = getTranslatedSentence(sentenceOption, preProcessedTags)
                 if transCost < lowestCost:
                     transSentence = transSentenceOption
         else:
-            transSentence, transCost = getTranslatedSentence(preProcessedSentence)
+            transSentence, transCost = getTranslatedSentence(preProcessedSentence, preProcessedTags)
 
         postProcessedTags, postProcessedSentence = applyRules.postProcess(preProcessedTags, transSentence)
 
@@ -123,24 +127,23 @@ class Translator:
             return secondSplit.split("***")
 
 
-        f = open(fileName)
-        for line in f:
-            sourceSplits = splitLines(line)
-            target = []
-            for source in sourceSplits:
-                target += self.translateSentence(source.split())
-            print "Spanish sentence:"
-            print line
-            print "English translation:"
-            print " ".join(target)
-            print
-            print
-        f.close()
+        with open(fileName) as f:
+            for line in f:
+                sourceSplits = splitLines(line)
+                target = []
+                for source in sourceSplits:
+                    target += self.translateFragment(source.split())
+                print "Spanish sentence:"
+                print line
+                print "English translation:"
+                print " ".join([word for word in target if word != ""])
+                print
+                print
 
 
 def main():
   t = Translator()
-  t.translateFile(DEV_SET_FILE)
+  t.translateFile(TEST_SET_FILE)
 
 if __name__ == "__main__":
     main()

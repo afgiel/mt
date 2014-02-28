@@ -5,7 +5,6 @@ reunían:<THEY> met
 dijo:<IT> said
 concentración:concentration
 reestablecerse:to recover
-maduro:Mature
 arresto:arrest
 uno:one
 país:country
@@ -219,5 +218,5 @@ programa:program,platform
 y:and
 dos:two
 se:oneself,self
-eEUU: United States
-eE.UU: United States
+eeuu: United States
+ee.uu: United States
