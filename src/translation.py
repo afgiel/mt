@@ -69,11 +69,7 @@ class Translator:
                     transWords = assembleWords([toTranslate.lower()], cleanWordTuple)
                 else:
                     if toTranslate in DROP_WORDS:
-<<<<<<< HEAD
                         transWords = assembleWords(self.spanDict[toTranslate.lower()] + [''], cleanWordTuple) 
-=======
-                        transWords = assembleWords(self.spanDict[toTranslate] + [''], cleanWordTuple)
->>>>>>> FETCH_HEAD
                     else:
                         transWords = assembleWords(self.spanDict[toTranslate.lower()], cleanWordTuple) 
                 translations.append(transWords)
@@ -147,7 +143,7 @@ class Translator:
 
 def main():
   t = Translator()
-  t.translateFile(TEST_SET_FILE)
+  t.translateFile(DEV_SET_FILE)
 
 if __name__ == "__main__":
     main()
