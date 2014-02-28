@@ -7,6 +7,7 @@ import KneserBigramModel
 import KneserTrigramModel
 import string
 import applyRules
+import sys
 
 DEV_SET_FILE = "../data/dev.txt"
 TEST_SET_FILE = "../data/test.txt"
@@ -58,8 +59,31 @@ class Translator:
                 translations.append(cleanWordTuple[FRONT_QUOTE] + word + cleanWordTuple[END_QUOTE] + cleanWordTuple[END_PUNC_I])
             return translations
 
+        def getTranslatedSentence(sentenceToTranslate):
+            translations = []
+            for word in sentenceToTranslate:
+                cleanWordTuple = cleanWord(word)
+                toTranslate = cleanWordTuple[WORD]
+                transWords = []
+                if toTranslate not in self.spanDict:
+                    transWords = assembleWords([toTranslate], cleanWordTuple)
+                else:
+                    if toTranslate in DROP_WORDS:
+                        transWords = assembleWords(self.spanDict[toTranslate] + [''], cleanWordTuple) 
+                    else:
+                        transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
+                translations.append(transWords)
+            transSentence, transCost = UCS.UCS(translations, self.lm)
+            return transSentence, transCost
 
-        translations = []
+        def getSentenceOptions(tupledSentencesToTranslate, sentenceOptions):
+            for tupledSentence in tupledSentencesToTranslate:
+                if isinstance(tupledSentence, tuple) == False:
+                    sentenceOptions.append(tupledSentence)
+                else:
+                    getSentenceOptions(tupledSentence, sentenceOptions)
+
+
         prepreProcessedSentence = []
         prepreProcessedTags = []
 
@@ -74,19 +98,17 @@ class Translator:
             prepreProcessedTags.append(tagTuple[1])
         preProcessedTags, preProcessedSentence = applyRules.preProcess(prepreProcessedTags, prepreProcessedSentence)
 
-        for word in preProcessedSentence:
-            cleanWordTuple = cleanWord(word)
-            toTranslate = cleanWordTuple[WORD]
-            transWords = []
-            if toTranslate not in self.spanDict:
-                transWords = assembleWords([toTranslate], cleanWordTuple)
-            else:
-                if toTranslate in DROP_WORDS:
-                    transWords = assembleWords(self.spanDict[toTranslate] + [''], cleanWordTuple) 
-                else:    
-                    transWords = assembleWords(self.spanDict[toTranslate], cleanWordTuple) 
-            translations.append(transWords)
-        transSentence = UCS.UCS(translations, self.lm)
+        transSentence = ""
+        if isinstance(preProcessedSentence, tuple):
+            lowestCost = sys.maxint
+            sentenceOptions = []
+            getSentenceOptions(preProcessedSentence, sentenceOptions)
+            for sentenceOption in sentenceOptions:
+                transSentenceOption, transCost = getTranslatedSentence(sentenceOption)
+                if transCost < lowestCost:
+                    transSentence = transSentenceOption
+        else:
+            transSentence, transCost = getTranslatedSentence(preProcessedSentence)
 
         postProcessedTags, postProcessedSentence = applyRules.postProcess(preProcessedTags, transSentence)
 
